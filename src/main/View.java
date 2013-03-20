@@ -7,6 +7,7 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 
+import render.Drawable;
 import util.Vector;
 
 public class View implements Runnable {
@@ -18,8 +19,8 @@ public class View implements Runnable {
 	private int windowWidth, windowHeight;
 
 	private Vector viewTranslation;
-	int viewDistance = 100;
-	float FOV = 45.0f;
+	private int viewDistance = 100;
+	private float FOV = 45.0f;
 
 	public View(int width, int height) {
 		windowWidth = width;
@@ -83,6 +84,9 @@ public class View implements Runnable {
 				 * Draw Code
 				 */
 
+				for (Drawable drawable : model.drawableObjects)
+					drawable.draw();
+				
 				/*
 				 * End draw code
 				 */
