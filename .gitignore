@@ -1,7 +1,7 @@
 *.class
 *.sh
 *.bin
-build
+/bin
 .classpath
 .project
 .settings
