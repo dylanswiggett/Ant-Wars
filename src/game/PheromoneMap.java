@@ -1,7 +1,7 @@
 package game;
 
 class PheromoneMap {
-  enum Pheromones {TRAIL, FOOD, ALARM};
+  enum Pheromones {TRAIL, FOOD, ALARM, AGGRESSION};
 	
 	
 	public PheromoneMap(){
