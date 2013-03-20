@@ -15,4 +15,12 @@ public abstract class Sprite2D implements Drawable {
 	}
 
 	public abstract void draw();
+	
+	public void setPosition(Vector newPosition){
+		position = newPosition;
+	}
+	
+	public void setDimension(Vector newDimension){
+		dimension = newDimension;
+	}
 }

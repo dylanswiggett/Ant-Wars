@@ -72,7 +72,7 @@ public class View implements Runnable {
 			while (!(Display.isCloseRequested() || Keyboard.isKeyDown(Keyboard.KEY_Q))) {
 				// Don't eat everything!!!
 				try {
-					Thread.sleep(1);
+					Thread.sleep(16);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
