@@ -11,7 +11,7 @@ import render.Drawable;
 import util.Vector;
 
 public class View implements Runnable {
-	private static final String TITLE = "Ant Wars RTS v. 0.0.00.0.000   (c)2013";
+	private static final String TITLE = "Ant Wars RTS v. 0.0.00.0.001   (c)2013";
 
 	private Model model;
 	private Controller controller;

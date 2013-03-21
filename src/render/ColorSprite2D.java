@@ -9,7 +9,7 @@ import util.Vector;
 public class ColorSprite2D extends Sprite2D{
 	float red, green, blue;
 	
-	public ColorSprite2D(Vector position, Vector dimension, int verticalOffset, Color color) {
+	public ColorSprite2D(Vector position, Vector dimension, double verticalOffset, Color color) {
 		super(position, dimension, verticalOffset);
 		red =   ((float) color.getRed())   / 255;
 		green = ((float) color.getGreen()) / 255;
