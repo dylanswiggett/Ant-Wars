@@ -25,7 +25,7 @@ class PheromoneMap {
 	class PheromoneNode {
 	  Pheromones type;
 	  PheromoneNode parent;
-		
+	  
 	}
 	
 	class PheromoneTrail {
