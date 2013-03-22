@@ -26,7 +26,7 @@ public class GridSprite2D extends Sprite2D {
 		GL11.glPushMatrix();
 		GL11.glTranslated(position.x, position.y, verticalOffset);
 		
-		GL11.glColor3f(0.0f, 0.0f, 0.0f);
+		GL11.glColor3f(0.8f, 0.8f, 0.8f);
 		
 		GL11.glNormal3d(0, 0, 1);
 		
@@ -34,13 +34,13 @@ public class GridSprite2D extends Sprite2D {
 		double yScale = dimension.y / vGrids;
 		
 		// Inner lines
-		for (int x = 0; x < hGrids; x++){
+		for (int x = 0; x <= hGrids; x++){
 			GL11.glBegin(GL11.GL_LINE_STRIP);
 			GL11.glVertex3d(x * xScale, 0, 0);
 			GL11.glVertex3d(x * xScale, dimension.y, 0);
 			GL11.glEnd();
 		}
-		for (int y = 0; y < vGrids; y++){
+		for (int y = 0; y <= vGrids; y++){
 			GL11.glBegin(GL11.GL_LINE_STRIP);
 			GL11.glVertex3d(0, y * yScale, 0);
 			GL11.glVertex3d(dimension.x, y * yScale, 0);

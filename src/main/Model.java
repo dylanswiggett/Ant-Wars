@@ -31,11 +31,11 @@ public class Model implements Runnable{
 		ants = new ArrayList<>();
 		
 		// White background plane, and a test polygon
-		ColorSprite2D demoSprite = new ColorSprite2D(new Vector(-100, -100),
-				new Vector(1000, 1000), 0, Color.WHITE);
+		ColorSprite2D demoSprite = new ColorSprite2D(new Vector(-200, -200),
+				new Vector(400, 400), 0, Color.WHITE);
 		drawableObjects.add(demoSprite);
 		
-		GridSprite2D grid = new GridSprite2D(new Vector(-100, -100), new Vector(200, 200), 20, 20, .5);
+		GridSprite2D grid = new GridSprite2D(new Vector(-200, -200), new Vector(400, 400), 40, 40, .5);
 		drawableObjects.add(grid);
 		
 		// Test ants

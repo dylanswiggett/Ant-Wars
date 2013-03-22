@@ -18,15 +18,11 @@ public class View implements Runnable {
 
 	private int windowWidth, windowHeight;
 
-	private Vector viewTranslation;
-	private int viewDistance = 100;
 	private float FOV = 45.0f;
 
 	public View(int width, int height) {
 		windowWidth = width;
 		windowHeight = height;
-
-		viewTranslation = new Vector(0, 0);
 	}
 
 	public void setModel(Model model) {
@@ -102,22 +98,24 @@ public class View implements Runnable {
 		 * Clean up
 		 */
 
-		Display.destroy();
 		model.endGame();
 		controller.endGame();
+		Display.destroy();
 	}
 
 	/**
 	 * Initialize the camera for the next frame of OpenGL.
 	 */
 	private void setCamera() {
+		Vector viewTranslation = controller.getCameraPosition();
+		
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
 
 		float whRatio = (float) windowWidth / (float) windowHeight;
 		GLU.gluPerspective(FOV, whRatio, 1, 100000);
-		GLU.gluLookAt((float) viewTranslation.x, (float) viewTranslation.y, (float) viewDistance,
+		GLU.gluLookAt((float) viewTranslation.x, (float) viewTranslation.y, (float) controller.getCameraDistance(),
 				(float) viewTranslation.x, (float) viewTranslation.y, 0, 0, 1, 0);
 
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
