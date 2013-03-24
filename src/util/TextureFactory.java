@@ -10,6 +10,14 @@ import org.newdawn.slick.util.ResourceLoader;
 public class TextureFactory {
 	private static final HashMap<String, Texture>  textures = new HashMap<>();
 	
+	/**
+	 * 
+	 * Load a texture, then store it so that the same texture won't be reloaded if re-requested.
+	 * 
+	 * @param filePath
+	 * @param resourceType
+	 * @return
+	 */
 	public static Texture getTexture(String filePath, String resourceType){
 		Texture tex = textures.get(filePath);
 		if (tex == null)
@@ -24,7 +32,14 @@ public class TextureFactory {
 		return tex;
 	}
 	
-	public static Texture getTexture(String filePath){
+	/**
+	 * 
+	 * Load a PNG texture.
+	 * 
+	 * @param filePath
+	 * @return
+	 */
+	public static Texture getTexturePNG(String filePath){
 		return getTexture(filePath, "PNG");
 	}
 }

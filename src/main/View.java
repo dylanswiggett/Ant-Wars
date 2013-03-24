@@ -59,7 +59,7 @@ public class View implements Runnable {
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glAlphaFunc(GL11.GL_GREATER, 0.1f);
-			GL11.glEnable(GL11.GL_ALPHA_TEST);
+			//GL11.glEnable(GL11.GL_ALPHA_TEST);
 			GL11.glHint(GL11.GL_PERSPECTIVE_CORRECTION_HINT, GL11.GL_NICEST);
 			GL11.glClearColor(0.0f, 0.0f, 0.0f, 1f);
 		}

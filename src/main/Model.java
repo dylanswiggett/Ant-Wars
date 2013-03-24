@@ -10,6 +10,7 @@ import java.util.Random;
 import render.ColorSprite2D;
 import render.Drawable;
 import render.GridSprite2D;
+import render.RectTextureSprite2D;
 import util.MersenneTwister;
 import util.Vector;
 
@@ -45,6 +46,9 @@ public class Model implements Runnable{
 			drawableObjects.add(ant);
 			timedObjects.add(ant);
 		}
+		
+		RectTextureSprite2D texTest = new RectTextureSprite2D(new Vector(-20, -20), new Vector(50, 50), 3, "assets/textures/leaf1.png", "PNG");
+		drawableObjects.add(texTest);
 	}
 	
 	public void run() {

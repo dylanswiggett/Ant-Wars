@@ -8,8 +8,8 @@ public class Main {
 	
 	public static void main(String[] args){
 		View view = new View(WIDTH, HEIGHT);
-		Model model = new Model();
 		Controller controller = new Controller();
+		Model model = new Model();
 		
 		view.setModel(model);
 		view.setController(controller);
@@ -18,6 +18,5 @@ public class Main {
 		new Thread(model).start();
 		new Thread(controller).start();
 		new Thread(view).start();
-		
 	}
 }
