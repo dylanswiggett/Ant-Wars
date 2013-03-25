@@ -59,9 +59,22 @@ public class Vector {
 	public double mag() {
 		return Math.sqrt(x * x + y * y);
 	}
+	
+	public double mag2(){
+		return x * x + y * y;
+	}
 
 	public Vector norm() {
 		return scale(1 / mag());
+	}
+	
+	public Vector normOrZero() {
+		double mag = mag();
+		if( mag == 0 ){
+			return new Vector(0,0);
+		} else {
+			return scale(1/mag);
+		}
 	}
 
 	public Vector rot(double deg) {
@@ -76,5 +89,9 @@ public class Vector {
 	
 	public Vector perp(Vector v) {
 		return minus(projection(v));
+	}
+	
+	public String toString(){
+		return "<"+x+","+y+">";
 	}
 }
