@@ -3,6 +3,8 @@ package game;
 import java.awt.Color;
 import java.util.*;
 
+import main.Model;
+
 import render.ColorSprite2D;
 import render.Drawable;
 
@@ -12,13 +14,15 @@ import util.Vector;
 public class PheromoneMap implements Drawable{
 	public enum Pheromones {TRAIL, FOOD, ALARM, AGGRESSION};
 	public enum Direction{NORTH, SOUTH, EAST, WEST};
-	List<PheromoneNode> pheromones;
-	Random random;
-	ColorSprite2D sprite;
+	private List<PheromoneNode> pheromones;
+	private ColorSprite2D sprite;
+	private Vector spriteOffset;
+	
 	public PheromoneMap(){
 		pheromones = new ArrayList<PheromoneNode>();
-		random = new MersenneTwister();
-		sprite = new ColorSprite2D(new Vector(0,0), new Vector(1,1), 1, Color.RED);
+		int spriteSize = 1;
+		sprite = new ColorSprite2D(new Vector(0,0), new Vector(spriteSize, spriteSize), 1, Color.RED);
+		spriteOffset = new Vector(-spriteSize / 2, -spriteSize / 2);
 	}
 	
 	/** Given a position, this chooses the next direction to visit.
@@ -49,7 +53,7 @@ public class PheromoneMap implements Drawable{
 				if( distance2 < 1 ) {
 					score = 0;
 				} else {
-					score = ((1/distance2+0.1) + (1/(preferredDirection.minus(point.normOrZero()).mag2()+0.1) + typeModifier*n.intensity + random.nextDouble()*jitter));
+					score = ((1/distance2+0.1) + (1/(preferredDirection.minus(point.normOrZero()).mag2()+0.1) + typeModifier*n.intensity + Model.random.nextDouble()*jitter));
 				}
 				best.addInPlace(delta.normOrZero().scale(score));
 			}
@@ -62,9 +66,8 @@ public class PheromoneMap implements Drawable{
 	}
 	
 	public void draw(){
-		Vector dimension = new Vector(1,1);
 		for( PheromoneNode n : pheromones ){
-			sprite.setPosition(n.position.minus(dimension.scale(.5)));
+			sprite.setPosition(n.position.minus(spriteOffset));
 			sprite.draw();
 		}
 	}

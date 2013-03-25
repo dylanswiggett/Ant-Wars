@@ -43,6 +43,7 @@ public class Model implements Runnable{
 
 		PheromoneMap pheromoneMap = new PheromoneMap();
 		pheromoneMap.placePheromone(new Vector(20,20),PheromoneMap.Pheromones.TRAIL, 10);
+		pheromoneMap.placePheromone(new Vector(25,25),PheromoneMap.Pheromones.TRAIL, 10);
 		drawableObjects.add(pheromoneMap);
 		
 		// Test ants
