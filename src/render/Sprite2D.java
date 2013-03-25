@@ -1,8 +1,9 @@
 package render;
 
+import util.Positioned;
 import util.Vector;
 
-public abstract class Sprite2D implements Drawable {
+public abstract class Sprite2D implements Drawable, Positioned {
 	protected Vector position, dimension;
 	protected double verticalOffset; // Amount to offset from z = 0 when drawing.
 									 // Use to avoid clipping when drawing
@@ -15,6 +16,10 @@ public abstract class Sprite2D implements Drawable {
 	}
 
 	public abstract void draw();
+	
+	public Vector getPosition() {
+		return position;
+	}
 	
 	public void setPosition(Vector newPosition){
 		position = newPosition;

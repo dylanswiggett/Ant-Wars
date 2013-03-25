@@ -5,9 +5,10 @@ import java.awt.Color;
 import main.Model;
 import render.ColorSprite2D;
 import render.Drawable;
+import util.Positioned;
 import util.Vector;
 
-public class Ant implements Drawable, Timed{
+public class Ant implements Drawable, Timed, Positioned{
 	private static final Vector dimension = new Vector(1, 1);
 	private static final ColorSprite2D antSprite = new ColorSprite2D(new Vector(), dimension, 1, Color.GRAY);
 	private Vector position;
@@ -51,5 +52,9 @@ public class Ant implements Drawable, Timed{
 	public void draw(){
 		antSprite.setPosition(position.minus(dimension.scale(.5)));
 		antSprite.draw();
+	}
+	
+	public Vector getPosition() {
+		return position;
 	}
 }
