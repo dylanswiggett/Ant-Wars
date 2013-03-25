@@ -1,14 +1,13 @@
 package game;
 
 import java.awt.Color;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import main.Model;
-
 import render.ColorSprite2D;
 import render.Drawable;
-
-import util.MersenneTwister;
+import util.Positioned;
 import util.Vector;
 
 public class PheromoneMap implements Drawable{
@@ -72,7 +71,7 @@ public class PheromoneMap implements Drawable{
 		}
 	}
 	
-	private class PheromoneNode {
+	private class PheromoneNode implements Positioned{
 	  Pheromones type;
 	  int intensity;
 	  Vector position;
@@ -81,6 +80,10 @@ public class PheromoneMap implements Drawable{
 		  this.position = position;
 		  this.type = type;
 		  this.intensity = intensity;
+	  }
+	  
+	  public Vector getPosition() {
+		  return position;
 	  }
 	}
 }
