@@ -8,6 +8,8 @@ import main.Model;
 import render.ColorSprite2D;
 import render.Drawable;
 import util.Positioned;
+import util.RTree;
+import util.SpatialAlgorithm;
 import util.Vector;
 
 public class PheromoneMap implements Drawable{
@@ -16,12 +18,15 @@ public class PheromoneMap implements Drawable{
 	private List<PheromoneNode> pheromones;
 	private ColorSprite2D sprite;
 	private Vector spriteOffset;
+	private SpatialAlgorithm<PheromoneNode> map;
 	
 	public PheromoneMap(){
 		pheromones = new ArrayList<PheromoneNode>();
 		int spriteSize = 1;
 		sprite = new ColorSprite2D(new Vector(0,0), new Vector(spriteSize, spriteSize), 1, Color.RED);
 		spriteOffset = new Vector(-spriteSize / 2, -spriteSize / 2);
+		
+		map = new RTree<>();
 	}
 	
 	/** Given a position, this chooses the next direction to visit.
