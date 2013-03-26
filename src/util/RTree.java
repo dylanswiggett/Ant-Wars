@@ -3,6 +3,8 @@ package util;
 import game.Ant;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -62,6 +64,7 @@ public class RTree<E extends Positioned> implements SpatialAlgorithm<E>, Drawabl
 			return false;
 	}
 
+	// TODO Implement
 	@Override
 	public E nearestTo(Vector p) {
 		return null;
@@ -69,12 +72,27 @@ public class RTree<E extends Positioned> implements SpatialAlgorithm<E>, Drawabl
 
 	@Override
 	public List<E> inCircle(Vector p, double r) {
-		return null;
+		List<E> list = inRectangle(p.minus(new Vector(r, r)), p.plus(new Vector(r, r)));
+		
+		Iterator<E> i = list.iterator();
+		
+		double dist2 = r * r;
+		
+		while (i.hasNext()){
+			E item = i.next();
+			if (item.getPosition().minus(p).mag2() > dist2)
+				i.remove();
+		}
+		
+		return list;
 	}
 
 	@Override
-	public List<E> inRectangle(Vector p, Vector dim) {
-		return null;
+	public List<E> inRectangle(Vector corner1, Vector corner2) {
+		if (root == null)
+			return new LinkedList<E>();
+		else
+			return root.searchRectangle(corner1, corner2);
 	}
 
 	class RTreeNode<E extends Positioned> {
@@ -100,6 +118,23 @@ public class RTree<E extends Positioned> implements SpatialAlgorithm<E>, Drawabl
 			upperCorner = new Vector(lowerCorner);
 
 			volume = 0;
+		}
+		
+		private List<E> searchRectangle(Vector c1, Vector c2){
+			LinkedList<E> list = new LinkedList<>();
+			if (contains(c1, c2)){
+				if (objects != null){
+					for (E obj : objects){
+						Vector pos = obj.getPosition();
+						if(pos.x >= c1.x && pos.x <= c2.x &&
+						   pos.y >= c1.y && pos.y <= c2.y)
+							list.add(obj);
+					}
+				} else
+					for (RTreeNode<E> n : subNodes)
+						list.addAll(n.searchRectangle(c1, c2));
+			}
+			return list;
 		}
 
 		private void add(E obj) {
@@ -157,6 +192,11 @@ public class RTree<E extends Positioned> implements SpatialAlgorithm<E>, Drawabl
 
 		private boolean contains(Vector p) {
 			return (p.x >= lowerCorner.x && p.x <= upperCorner.x && p.y >= lowerCorner.y && p.y <= upperCorner.y);
+		}
+		
+		private boolean contains(Vector c1, Vector c2) {
+			return !(lowerCorner.x > c2.x || upperCorner.x < c1.x ||
+					 lowerCorner.y > c2.y || upperCorner.y < c1.y);
 		}
 
 		private void calculateVolume() {
