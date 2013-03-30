@@ -8,7 +8,7 @@ import main.Model;
 import render.ColorSprite2D;
 import render.Drawable;
 import util.Positioned;
-import util.RTree;
+import util.SimpleRTree;
 import util.SpatialAlgorithm;
 import util.Vector;
 
@@ -26,7 +26,7 @@ public class PheromoneMap implements Drawable{
 		sprite = new ColorSprite2D(new Vector(0,0), new Vector(spriteSize, spriteSize), 1, Color.RED);
 		spriteOffset = new Vector(-spriteSize / 2, -spriteSize / 2);
 		
-		map = new RTree<>();
+		map = new SimpleRTree<>();
 	}
 	
 	/** Given a position, this chooses the next direction to visit.
