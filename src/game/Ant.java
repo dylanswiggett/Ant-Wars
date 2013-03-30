@@ -15,9 +15,14 @@ public class Ant implements Drawable, Timed, Positioned{
 	private Vector direction;
 	private int stepsWithDirection;
 	private PheromoneMap pheromoneMap;
+	private PheromoneMap2 testMap;
 	
 	public void setPheromoneMap(PheromoneMap m){
 		pheromoneMap = m;
+	}
+	
+	public void setTestMap(PheromoneMap2 m){
+		testMap = m;
 	}
 	
 	public Ant(Vector initialPosition){
@@ -43,7 +48,7 @@ public class Ant implements Drawable, Timed, Positioned{
 		Vector randomVariation = new Vector(Model.random.nextDouble() - .5, Model.random.nextDouble() - .5);
 		move.addInPlace(randomVariation);
 		
-		Vector pheromoneAttraction = pheromoneMap.getBest(position, new Vector(0,0), 150, 10).scale(timeStep);
+		Vector pheromoneAttraction = testMap.getDirection(position, new Vector()).scale(timeStep);//pheromoneMap.getBest(position, new Vector(0,0), 150, 10).scale(timeStep);
 
 		position.addInPlace(pheromoneAttraction);
 		position.addInPlace(move.scale(timeStep));

@@ -11,14 +11,12 @@ import render.Drawable;
 import util.Vector;
 
 public class View implements Runnable {
-	private static final String TITLE = "Ant Wars RTS v. 0.0.00.0.001   (c)2013";
+	private static final String TITLE = "Ant Wars RTS v. 0.0.00.0.002   (c)2013";
 
 	private Model model;
 	private Controller controller;
 
 	private int windowWidth, windowHeight;
-
-	private float FOV = 45.0f;
 
 	public View(int width, int height) {
 		windowWidth = width;
@@ -59,7 +57,7 @@ public class View implements Runnable {
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glAlphaFunc(GL11.GL_GREATER, 0.1f);
-			//GL11.glEnable(GL11.GL_ALPHA_TEST);
+			// GL11.glEnable(GL11.GL_ALPHA_TEST);
 			GL11.glHint(GL11.GL_PERSPECTIVE_CORRECTION_HINT, GL11.GL_NICEST);
 			GL11.glClearColor(0.0f, 0.0f, 0.0f, 1f);
 		}
@@ -80,9 +78,11 @@ public class View implements Runnable {
 				 * Draw Code
 				 */
 
-				for (Drawable drawable : model.drawableObjects)
-					drawable.draw();
-				
+				synchronized (model.drawableObjects) {
+					for (Drawable drawable : model.drawableObjects)
+						drawable.draw();
+				}
+
 				/*
 				 * End draw code
 				 */
@@ -90,7 +90,8 @@ public class View implements Runnable {
 				Display.update();
 			}
 		} catch (Exception e) {
-			System.err.println("Uncaught exception in View main loop: " + e.getMessage() + "\nCleaning up and exiting.");
+			System.err.println("Uncaught exception in View main loop: " + e.getMessage()
+					+ "\nCleaning up and exiting.");
 			e.printStackTrace();
 		}
 
@@ -108,15 +109,16 @@ public class View implements Runnable {
 	 */
 	private void setCamera() {
 		Vector viewTranslation = controller.getCameraPosition();
-		
+
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
 
 		float whRatio = (float) windowWidth / (float) windowHeight;
-		GLU.gluPerspective(FOV, whRatio, 1, 100000);
-		GLU.gluLookAt((float) viewTranslation.x, (float) viewTranslation.y, (float) controller.getCameraDistance(),
-				(float) viewTranslation.x, (float) viewTranslation.y, 0, 0, 1, 0);
+		GLU.gluPerspective(controller.getFOV(), whRatio, 1, 100000);
+		GLU.gluLookAt((float) viewTranslation.x, (float) viewTranslation.y,
+				(float) controller.getCameraDistance(), (float) viewTranslation.x,
+				(float) viewTranslation.y, 0, 0, 1, 0);
 
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		GL11.glLoadIdentity();

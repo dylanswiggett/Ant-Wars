@@ -49,13 +49,13 @@ public class RTreeWrapper<E extends Positioned> implements SpatialAlgorithm<E> {
 
 	@Override
 	public List<E> inCircle(Vector p, double r) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<E> inRectangle(Vector corner1, Vector corner2) {
-		// TODO Auto-generated method stub
+		Rectangle rect = new Rectangle();
+		rect.set((float) corner1.x, (float) corner1.y, (float) corner2.x, (float) corner2.y);
 		return null;
 	}
 	
